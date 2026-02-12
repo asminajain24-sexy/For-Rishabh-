@@ -6,265 +6,153 @@
     <title>FOR RISHABH ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --red: #FF0000;
-            --white: #FFFFFF;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--white);
-            font-family: 'Montserrat', sans-serif;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        :root { --red: #FF0000; --white: #FFFFFF; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            background-color: var(--white); 
+            font-family: 'Montserrat', sans-serif; 
+            height: 100vh; 
+            width: 100vw; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
             position: relative;
+            touch-action: manipulation;
         }
 
-        /* Floating Background Hearts */
-        .bg-heart {
-            position: absolute;
-            color: rgba(255, 0, 0, 0.1);
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 1;
-            animation: float 4s infinite linear;
-        }
+        /* Floating BG */
+        .bg-heart { position: absolute; color: rgba(255, 0, 0, 0.15); pointer-events: none; z-index: 1; animation: float 4s infinite linear; }
+        @keyframes float { 0% { transform: translateY(110vh); } 100% { transform: translateY(-10vh); } }
 
-        @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-10vh) rotate(360deg); }
-        }
-
-        /* Initial Heart State */
-        #main-wrapper {
-            position: relative;
-            z-index: 100;
+        /* Screen-wide Tap Zone */
+        #click-surface {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1000; display: flex; justify-content: center; align-items: center;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
-        .heart {
+        /* The Heart */
+        .heart-box { position: relative; width: 150px; height: 150px; pointer-events: none; }
+        .heart-shape {
             background-color: var(--red);
-            display: inline-block;
-            height: 120px;
-            position: relative;
-            transform: rotate(-45deg);
-            width: 120px;
-            animation: pulse 1.2s infinite;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+            height: 100px; width: 100px;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            animation: beat 1s infinite;
         }
-
-        .heart:before, .heart:after {
-            content: "";
-            background-color: var(--red);
-            border-radius: 50%;
-            height: 120px;
-            position: absolute;
-            width: 120px;
+        .heart-shape:before, .heart-shape:after {
+            content: ""; background-color: var(--red); border-radius: 50%;
+            height: 100px; width: 100px; position: absolute;
         }
+        .heart-shape:before { top: -50px; left: 0; }
+        .heart-shape:after { left: 50px; top: 0; }
 
-        .heart:before { top: -60px; left: 0; }
-        .heart:after { left: 60px; top: 0; }
-
-        .tap-text {
-            position: absolute;
-            z-index: 101;
-            color: var(--white);
-            text-align: center;
-            font-size: 14px;
-            font-weight: 900;
-            line-height: 1.2;
-            pointer-events: none;
+        .label {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: white; font-size: 14px; font-weight: 900;
+            text-align: center; width: 120px; z-index: 10;
             text-transform: uppercase;
         }
 
-        @keyframes pulse {
-            0% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-45deg) scale(1.1); }
-            100% { transform: rotate(-45deg) scale(1); }
+        @keyframes beat {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+            50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.15); }
         }
 
-        /* Question Section */
-        #question-box {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            z-index: 200;
-            width: 90%;
-            max-width: 500px;
+        /* Question Box */
+        #question-ui {
+            display: none; opacity: 0; text-align: center; z-index: 2000;
+            width: 90%; transition: opacity 0.5s ease;
         }
-
-        h1 {
-            color: var(--red);
-            font-size: 32px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
+        h1 { color: var(--red); font-size: 2.2rem; margin-bottom: 40px; text-transform: uppercase; line-height: 1; }
+        
+        .btn-wrap { display: flex; flex-direction: column; gap: 20px; align-items: center; }
         button {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            padding: 18px 50px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: 0.2s;
-            width: 100%;
+            font-family: 'Montserrat', sans-serif; font-weight: 900;
+            padding: 20px 60px; border-radius: 15px; border: none;
+            text-transform: uppercase; font-size: 1.2rem; width: 100%; max-width: 300px;
         }
+        #yes { background: var(--red); color: white; box-shadow: 0 10px 30px rgba(255,0,0,0.3); }
+        #no { background: white; color: var(--red); border: 4px solid var(--red); position: relative; }
 
-        #yes {
-            background-color: var(--red);
-            color: var(--white);
-            border: none;
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
-        }
-
-        #no {
-            background-color: transparent;
-            color: var(--red);
-            border: 3px solid var(--red);
-            position: relative;
-        }
-
-        /* Explosion Effect */
-        .particle {
-            position: absolute;
-            background-color: var(--red);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 150;
-        }
+        .pop { position: absolute; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 5000; }
     </style>
 </head>
-<body onclick="handleGlobalClick(event)">
+<body>
 
-    <div id="main-wrapper">
-        <div class="heart"></div>
-        <div class="tap-text">HEY BABY<br>TAP HERE!</div>
+    <div id="click-surface" onclick="doBurst(event)">
+        <div class="heart-box" id="heart-wrapper">
+            <div class="heart-shape"></div>
+            <div class="label">HEY BABY<br>TAP HERE!</div>
+        </div>
     </div>
 
-    <div id="question-box">
-        <h1 id="headline">WILL YOU BE MY VALENTINE?</h1>
-        <div class="btn-group">
-            <button id="yes" onclick="celebrate(event)">YES! 😍</button>
-            <button id="no" onmouseover="dodge()" onclick="dodge(event)">NO 😜</button>
+    <div id="question-ui">
+        <h1 id="title">WILL YOU BE MY VALENTINE?</h1>
+        <div class="btn-wrap">
+            <button id="yes" onclick="finish(event)">YES! 😍</button>
+            <button id="no" onmouseover="run(event)" onclick="run(event)">NO 😜</button>
         </div>
     </div>
 
     <script>
-        // Generate BG hearts
+        // BG Animation
         for(let i=0; i<30; i++) {
             let h = document.createElement('div');
-            h.className = 'bg-heart';
-            h.innerHTML = '❤️';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.animationDelay = Math.random() * 5 + 's';
-            h.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            h.className = 'bg-heart'; h.innerHTML = '❤️';
+            h.style.left = Math.random()*100+'vw';
+            h.style.animationDelay = Math.random()*5+'s';
             document.body.appendChild(h);
         }
 
-        let step = 0;
-
-        function handleGlobalClick(e) {
-            if (step !== 0) return;
-            step = 1;
-
-            const wrapper = document.getElementById('main-wrapper');
-            const qBox = document.getElementById('question-box');
-
-            // Visual feedback
-            createExplosion(e.clientX || window.innerWidth/2, e.clientY || window.innerHeight/2);
+        function doBurst(e) {
+            const surface = document.getElementById('click-surface');
+            const ui = document.getElementById('question-ui');
             
-            wrapper.style.transform = 'scale(0)';
-            wrapper.style.opacity = '0';
-
-            setTimeout(() => {
-                wrapper.style.display = 'none';
-                qBox.style.display = 'block';
-                // Trigger reflow for fade in
-                setTimeout(() => { qBox.style.opacity = '1'; }, 50);
-            }, 400);
+            // Effect
+            explode(e.clientX || window.innerWidth/2, e.clientY || window.innerHeight/2);
+            
+            surface.style.display = 'none';
+            ui.style.display = 'block';
+            setTimeout(() => { ui.style.opacity = '1'; }, 50);
         }
 
-        function createExplosion(x, y) {
-            for (let i = 0; i < 40; i++) {
+        function explode(x, y) {
+            for(let i=0; i<40; i++) {
                 const p = document.createElement('div');
-                p.className = 'particle';
-                let size = Math.random() * 15 + 5;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                p.style.left = x + 'px';
-                p.style.top = y + 'px';
+                p.className = 'pop';
+                let s = Math.random()*15+5;
+                p.style.width = p.style.height = s+'px';
+                p.style.left = x+'px'; p.style.top = y+'px';
                 document.body.appendChild(p);
-
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = Math.random() * 10 + 5;
-                const dx = Math.cos(angle) * velocity * 20;
-                const dy = Math.sin(angle) * velocity * 20;
-
-                p.animate([
-                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-                    { transform: `translate(${dx}px, ${dy}px) scale(0)`, opacity: 0 }
-                ], { duration: 1000, easing: 'cubic-bezier(0.1, 1, 0.1, 1)' });
-
+                const dx = (Math.random()-0.5)*800;
+                const dy = (Math.random()-0.5)*800;
+                p.animate([{transform:'scale(1)',opacity:1},{transform:translate(${dx}px,${dy}px) scale(0),opacity:0}], 1000);
                 setTimeout(() => p.remove(), 1000);
             }
         }
 
-        function dodge(e) {
+        function run(e) {
             if(e) e.stopPropagation();
-            const btn = document.getElementById('no');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            const b = document.getElementById('no');
+            b.style.position = 'fixed';
+            b.style.left = Math.random()*(window.innerWidth-150)+'px';
+            b.style.top = Math.random()*(window.innerHeight-50)+'px';
         }
 
-        function celebrate(e) {
+        function finish(e) {
             e.stopPropagation();
-            step = 2;
-            document.getElementById('headline').innerHTML = "YAYYY!!<br>YOU HAVE BEEN LOVE BOMBED BY ASMI<br>SEE YOU SOON MY LOVE!";
-            document.querySelector('.btn-group').style.display = 'none';
-
-            // Falling hearts rain
+            document.getElementById('title').innerHTML = "YAYYY!!<br>YOU HAVE BEEN LOVE BOMBED BY ASMI<br>SEE YOU SOON MY LOVE!";
+            document.querySelector('.btn-wrap').style.display = 'none';
             setInterval(() => {
                 const h = document.createElement('div');
-                h.innerHTML = '❤️';
-                h.style.position = 'fixed';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.top = '-50px';
-                h.style.fontSize = '30px';
-                h.style.zIndex = '1000';
-                h.animate([
-                    { transform: 'translateY(0)', opacity: 1 },
-                    { transform: 'translateY(110vh)', opacity: 0 }
-                ], { duration: 2500 });
+                h.innerHTML = '❤️'; h.style.position = 'fixed';
+                h.style.left = Math.random()*100+'vw'; h.style.top = '-50px';
+                h.animate([{transform:'translateY(0)',opacity:1},{transform:'translateY(110vh)',opacity:0}], 3000);
                 document.body.appendChild(h);
-                setTimeout(() => h.remove(), 2500);
             }, 100);
         }
     </script>
