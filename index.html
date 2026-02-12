@@ -3,268 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOR RISHABH ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <title>For Rishabh ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: #ffffff; /* White Theme */
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            cursor: pointer;
-        }
-
-        /* Background Hearts */
-        .bg-heart {
-            position: absolute;
-            color: rgba(255, 0, 0, 0.15);
-            font-size: 20px;
-            pointer-events: none;
-            z-index: 0;
-            animation: floatUp 4s infinite linear;
-        }
-
-        @keyframes floatUp {
-            from { transform: translateY(110vh) rotate(0deg); opacity: 1; }
-            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Main Container */
-        .container {
-            z-index: 10;
-            width: 100%;
-        }
-
-        /* Bursting Heart */
-        #heart-container {
-            position: relative;
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .main-heart {
-            width: 180px;
-            height: 160px;
-            background-color: #ff0000; /* Red Heart */
-            position: relative;
-            transform: rotate(-45deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
-            animation: pulse 1.2s infinite;
-        }
-
-        .main-heart::before, .main-heart::after {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            background-color: #ff0000;
-            border-radius: 50%;
-        }
-
-        .main-heart::before { top: -90px; left: 0; }
-        .main-heart::after { left: 90px; top: 0; }
-
-        .tap-text {
-            color: white;
-            transform: rotate(45deg);
-            z-index: 20;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        @keyframes pulse {
-            0% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-45deg) scale(1.1); }
-            100% { transform: rotate(-45deg) scale(1); }
-        }
-
-        /* Question Box */
-        #question-box {
-            display: none;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.5s ease;
-        }
-
-        h1 {
-            color: #ff0000;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            font-weight: 900;
-            line-height: 1.2;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 15px 45px;
-            font-size: 1.2rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        #yes-btn {
-            background-color: #ff0000;
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
-        }
-
-        #no-btn {
-            background-color: #f0f0f0;
-            color: #ff0000;
-            border: 2px solid #ff0000;
-        }
-
-        /* Explosion Particle */
-        .particle {
-            position: absolute;
-            background: #ff0000;
-            border-radius: 50%;
-            pointer-events: none;
-        }
+        body { background-color: #ffeef2; margin: 0; overflow: hidden; font-family: 'Dancing Script', cursive; text-align: center; }
+        .container { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; }
+        .heart { position: relative; width: 150px; height: 150px; background-color: #ff4d6d; transform: rotate(-45deg); box-shadow: 0 10px 30px rgba(255, 77, 109, 0.5); animation: pulse 1.5s infinite; }
+        .heart::before, .heart::after { content: ""; position: absolute; width: 150px; height: 150px; background-color: #ff4d6d; border-radius: 50%; }
+        .heart::before { top: -75px; left: 0; }
+        .heart::after { left: 75px; top: 0; }
+        .heart-text { transform: rotate(45deg); color: white; font-size: 1.8rem; z-index: 10; font-family: 'Pacifico', cursive; }
+        @keyframes pulse { 0% { transform: rotate(-45deg) scale(1); } 50% { transform: rotate(-45deg) scale(1.1); } 100% { transform: rotate(-45deg) scale(1); } }
+        #cupid { position: absolute; bottom: -150px; right: -150px; font-size: 80px; transition: all 1s ease; z-index: 20; }
+        #arrow { position: absolute; font-size: 50px; display: none; z-index: 15; right: 100px; top: 50%; transform: translateY(-50%) rotate(-135deg); }
+        #question-box { display: none; opacity: 0; transition: opacity 1s ease; z-index: 30; }
+        h1 { color: #c9184a; font-size: 3rem; }
+        .buttons button { background-color: #ff758f; border: none; padding: 15px 30px; font-size: 1.5rem; color: white; border-radius: 50px; cursor: pointer; margin: 10px; }
+        .bg-heart { position: absolute; color: rgba(255, 77, 109, 0.2); pointer-events: none; animation: float 5s infinite linear; }
+        @keyframes float { from { transform: translateY(110vh); } to { transform: translateY(-10vh); } }
     </style>
 </head>
-<body onclick="handleTap(event)">
-
-    <div class="container">
+<body onclick="startSurprise()">
+    <div class="container" id="main-wrap">
         <div id="heart-container">
-            <div class="main-heart">
-                <span class="tap-text">HEY BABY<br>TAP HERE!</span>
-            </div>
+            <div class="heart"><span class="heart-text">Tap Me, Rishabh!</span></div>
         </div>
-
+        <div id="cupid">🏹👼</div>
+        <div id="arrow">💘</div>
         <div id="question-box">
-            <h1 id="main-heading">WILL YOU BE MY VALENTINE?</h1>
-            <div class="buttons" id="btn-wrap">
-                <button id="yes-btn" onclick="celebrate(event)">YES! 😍</button>
-                <button id="no-btn" onmouseover="moveNoButton()" onclick="moveNoButton()">NO 😜</button>
+            <h1>Will You Be My Valentine?</h1>
+            <div class="buttons">
+                <button onclick="event.stopPropagation(); celebrate()">Yes! 😍</button>
+                <button id="no-btn" onmouseover="moveButton()">No 😜</button>
             </div>
         </div>
     </div>
-
     <script>
-        // Background floating hearts
-        function createBg() {
-            for(let i=0; i<30; i++) {
+        function createHearts() {
+            for(let i=0; i<20; i++) {
                 let h = document.createElement('div');
-                h.className = 'bg-heart';
-                h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.animationDelay = Math.random() * 5 + 's';
-                h.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                h.className = 'bg-heart'; h.innerHTML = '❤️';
+                h.style.left = Math.random()*100+'vw';
+                h.style.animationDuration = (Math.random()*3+2)+'s';
                 document.body.appendChild(h);
             }
         }
-        createBg();
+        createHearts();
 
-        let burstDone = false;
-
-        function handleTap(e) {
-            if(burstDone) return;
-            burstDone = true;
-
+        let started = false;
+        function startSurprise() {
+            if(started) return;
+            started = true;
+            const cupid = document.getElementById('cupid');
+            const arrow = document.getElementById('arrow');
             const heart = document.getElementById('heart-container');
             const qBox = document.getElementById('question-box');
 
-            // Create Burst Effect
-            createExplosion(window.innerWidth / 2, window.innerHeight / 2);
-            
-            heart.style.transform = "scale(0)";
-            heart.style.opacity = "0";
-
+            cupid.style.bottom = "10%"; cupid.style.right = "10%";
             setTimeout(() => {
-                heart.style.display = "none";
-                qBox.style.display = "block";
+                arrow.style.display = "block";
+                arrow.animate([{right:'10%'}, {right:'50%'}], {duration: 500});
                 setTimeout(() => {
-                    qBox.style.opacity = "1";
-                    qBox.style.transform = "scale(1)";
-                }, 50);
-            }, 300);
+                    heart.style.display = "none";
+                    arrow.style.display = "none";
+                    qBox.style.display = "block";
+                    setTimeout(() => qBox.style.opacity = "1", 50);
+                }, 450);
+            }, 1000);
         }
 
-        function createExplosion(x, y) {
-            for (let i = 0; i < 40; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = Math.random() * 15 + 5;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                p.style.left = x + 'px';
-                p.style.top = y + 'px';
-                
-                document.body.appendChild(p);
-                
-                const destinationX = (Math.random() - 0.5) * 600;
-                const destinationY = (Math.random() - 0.5) * 600;
-
-                const animation = p.animate([
-                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-                    { transform: `translate(${destinationX}px, ${destinationY}px) scale(0)`, opacity: 0 }
-                ], {
-                    duration: 800 + Math.random() * 400,
-                    easing: 'cubic-bezier(0, .9, .57, 1)'
-                });
-
-                animation.onfinish = () => p.remove();
-            }
-        }
-
-        function moveNoButton() {
+        function moveButton() {
             const btn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 50);
-            btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            btn.style.position = 'absolute';
+            btn.style.left = Math.random()*80+'vw';
+            btn.style.top = Math.random()*80+'vh';
         }
 
-        function celebrate(e) {
-            e.stopPropagation(); // Prevents double firing
-            document.getElementById('main-heading').innerHTML = "YAYYY!!<br>YOU HAVE BEEN LOVE BOMBED BY ASMI<br>SEE YOU SOON MY LOVE!";
-            document.getElementById('btn-wrap').style.display = 'none';
-            
-            // Celebration Rain
-            setInterval(() => {
-                const h = document.createElement('div');
-                h.innerHTML = '❤️';
-                h.style.position = 'fixed';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.top = '-50px';
-                h.style.fontSize = '30px';
-                h.style.zIndex = '100';
-                h.animate([
-                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                    { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
-                ], { duration: 3000 });
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 3000);
-            }, 100);
+        function celebrate() {
+            document.querySelector('h1').innerHTML = "Yay! See you on the 14th! ❤️";
+            document.querySelector('.buttons').style.display = 'none';
         }
     </script>
 </body>
