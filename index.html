@@ -225,7 +225,7 @@
 
                 const animation = p.animate([
                     { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-                    { transform: translate(${destinationX}px, ${destinationY}px) scale(0), opacity: 0 }
+                    { transform: `translate(${destinationX}px, ${destinationY}px) scale(0)`, opacity: 0 }
                 ], {
                     duration: 800 + Math.random() * 400,
                     easing: 'cubic-bezier(0, .9, .57, 1)'
@@ -260,7 +260,7 @@
                 h.style.zIndex = '100';
                 h.animate([
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                    { transform: translateY(110vh) rotate(${Math.random()*360}deg), opacity: 0 }
+                    { transform: `translateY(110vh) rotate(${Math.random()*360}deg)`, opacity: 0 }
                 ], { duration: 3000 });
                 document.body.appendChild(h);
                 setTimeout(() => h.remove(), 3000);
